@@ -23,5 +23,10 @@ import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
 <TokenAnnotator
   tokens={['My', 'text', 'needs', 'annotating', 'for', 'NLP', 'training']}
   value={[{start: 5, end: 6, tag: 'TOPIC', color: '#EEE'}]}
-/>
+/>,
 ```
+
+
+TODO:
+sample mit subject und object annotation
+dann predicate grafisch, auswahl es predicated grafisch

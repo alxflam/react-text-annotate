@@ -1,16 +1,16 @@
 import React from 'react'
-import {hot} from 'react-hot-loader'
+import { hot } from 'react-hot-loader'
 
-import {TextAnnotator, TokenAnnotator} from '../../src'
+import { TokenAnnotator } from '../../src'
 
-const TEXT = `On Monday night , Mr. Fallon will have a co-host for the first time : The rapper Cardi B , who just released her first album, " Invasion of Privacy . "`
+const TEXT = `COVID-19 is caused by virus SARS-CoV-2 which is a coronavirus.`
 
 const TAG_COLORS = {
-  ORG: '#00ffa2',
-  PERSON: '#84d2ff',
+  SUBJECT: '#00ffa2',
+  OBJECT: '#84d2ff',
 }
 
-const Card = ({children}) => (
+const Card = ({ children }) => (
   <div
     style={{
       boxShadow: '0 2px 4px rgba(0,0,0,.1)',
@@ -25,30 +25,30 @@ const Card = ({children}) => (
 
 class App extends React.Component<any, any> {
   state = {
-    value: [{start: 17, end: 19, tag: 'PERSON'}],
-    tag: 'PERSON',
+    value: [],
+    tag: 'SUBJECT',
   }
 
   handleChange = value => {
-    this.setState({value})
+    this.setState({ value })
   }
 
   handleTagChange = e => {
-    this.setState({tag: e.target.value})
+    this.setState({ tag: e.target.value })
   }
 
   render() {
     return (
-      <div style={{padding: 24, fontFamily: 'IBM Plex Sans'}}>
-        <h3 style={{marginTop: 0}}>react-text-annotate</h3>
+      <div style={{ padding: 24, fontFamily: 'IBM Plex Sans' }}>
+        <h3 style={{ marginTop: 0 }}>react-text-annotate</h3>
         <a href="https://github.com/mcamac/react-text-annotate">Github</a>
         <p>A React component for interactively highlighting parts of text.</p>
-        <div style={{display: 'flex', marginBottom: 24}}>
+        <div style={{ display: 'flex', marginBottom: 24 }}>
           <Card>
             <h4>Default</h4>
             <select onChange={this.handleTagChange} value={this.state.tag}>
-              <option value="ORG">ORG</option>
-              <option value="PERSON">PERSON</option>
+              <option value="SUBJECT">SUBJECT</option>
+              <option value="OBJECT">OBJECT</option>
             </select>
             <TokenAnnotator
               style={{
@@ -69,8 +69,8 @@ class App extends React.Component<any, any> {
           <Card>
             <h4>Custom rendered mark</h4>
             <select onChange={this.handleTagChange} value={this.state.tag}>
-              <option value="ORG">ORG</option>
-              <option value="PERSON">PERSON</option>
+              <option value="SUBJECT">SUBJECT</option>
+              <option value="OBJECT">OBJECT</option>
             </select>
             <TokenAnnotator
               style={{
@@ -89,7 +89,7 @@ class App extends React.Component<any, any> {
               renderMark={props => (
                 <mark
                   key={props.key}
-                  onClick={() => props.onClick({start: props.start, end: props.end})}
+                  onClick={() => props.onClick({ start: props.start, end: props.end })}
                 >
                   {props.content} [{props.tag}]
                 </mark>
